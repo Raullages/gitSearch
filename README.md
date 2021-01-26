@@ -21,8 +21,8 @@ Libs utilizadas:
 
 ### Development
 ```
-git clone https://raul_geraldo@bitbucket.org/raul_geraldo/github-repositorios.git
-cd desafio-github
+git clone https://github.com/Raullages/gitSearch.git
+cd gitSearch
 npm i
 ```
 
