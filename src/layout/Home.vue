@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-12">
           <dg-search  
-            placeholder="Pesquise por usuários"
+            placeholder="Pesquise pelo usuário"
             @fetch="fetch"
           />
         </div>
@@ -73,8 +73,8 @@ export default {
     }
   },
   methods: {
-    async fetch(user, forUrl = false) {
-      if (!forUrl) {
+    async fetch(user, hasParams = false) {
+      if (!hasParams) {
         this.$router.push({
           name: 'Home',
           params: {

@@ -145,6 +145,11 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.user && this.user.login) {
+      this.fetchRepos()
+    }
+  },
   methods: {
     async fetchRepos() {
       this.loadingRepos = true

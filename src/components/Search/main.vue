@@ -44,15 +44,16 @@ export default {
   },
   methods: {
     validField() {
-      const obg = "Required Field"
+      const obg = "Campo obrigatório"
       let passou = true
+
+      this.erroSearch = null
 
       if (!this.search) {
         this.erroSearch = obg
         passou = false
-      } else {
-        this.erroSearch = null
       }
+      
       return passou
     },
     clickSearch() {
