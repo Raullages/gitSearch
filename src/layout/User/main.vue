@@ -28,7 +28,11 @@
           <dg-buttons
             text="Repos"
             :typeButton="!showRepos ? 'btn-outline-success' : 'btn-success'"
-            @click-button="fetchRepos"
+            @click-button="() => {
+              showRepos = true;
+              showReposStarred = false;
+              fetchRepos();
+            }"
             :disabled="loadingRepos"
             :loading="loadingRepos"
             :length="repos.length"
@@ -38,7 +42,11 @@
           <dg-buttons
             text="Starred"
             :typeButton="!showReposStarred ? 'btn-outline-primary' : 'btn-primary'"
-            @click-button="fetchReposStarred"
+            @click-button="() => {
+              showRepos = false;
+              showReposStarred = true;
+              fetchReposStarred();
+            }"
             :disabled="loadingStarred"
             :loading="loadingStarred"
             :length="reposStarred.length"
@@ -145,9 +153,12 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     if (this.user && this.user.login) {
-      this.fetchRepos()
+      await this.fetchRepos()
+      await this.fetchReposStarred()
+      showRepos = true;
+      showReposStarred = false;
     }
   },
   methods: {
@@ -156,8 +167,6 @@ export default {
       await axios.get(`https://api.github.com/users/${this.user.login}/repos`)
         .then(repos => {
           this.loadingRepos = false
-          this.showRepos = true
-          this.showReposStarred = false
           this.repos = repos.data
           this.listFilterRepos = [...this.repos]
         })
@@ -167,8 +176,6 @@ export default {
       await axios.get(`https://api.github.com/users/${this.user.login}/starred`)
         .then(starred => {
           this.loadingStarred = false
-          this.showRepos = false
-          this.showReposStarred = true
           this.reposStarred = starred.data
           
           this.listFilterReposStarred = [...this.reposStarred]
