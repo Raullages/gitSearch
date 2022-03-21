@@ -157,8 +157,8 @@ export default {
     if (this.user && this.user.login) {
       await this.fetchRepos()
       await this.fetchReposStarred()
-      showRepos = true;
-      showReposStarred = false;
+      this.showRepos = true;
+      this.showReposStarred = false;
     }
   },
   methods: {
@@ -177,7 +177,6 @@ export default {
         .then(starred => {
           this.loadingStarred = false
           this.reposStarred = starred.data
-          
           this.listFilterReposStarred = [...this.reposStarred]
         })
     }
