@@ -11,13 +11,34 @@
               alt="github"
             />
           </div>
-          <div class="col-12">
-            <h5>{{ projectName }}</h5>
-          </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-12">
+          <ul class="nav nav-tabs ">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Buscar repositórios</a>
+            </li>
+            <li class="nav-item">
+              <a 
+                class="nav-link disabled"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Tooltip on bottom"
+                aria-current="page"
+                href="#"
+              >
+                Comandos básicos do git
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row py-4" style="background-color: #FFF">
+        <div class="col-12">
+          <h5>{{ projectName }}</h5>
+        </div>
+        <div class="col-12 mt-3">
           <dg-search  
             placeholder="Pesquise pelo usuário"
             @fetch="fetch"
@@ -80,7 +101,7 @@ export default {
   },
   computed: {
     infoLabel() {
-      return this.user ? false : true
+      return this.user && !this.loading ? false : true
     }
   },
   methods: {

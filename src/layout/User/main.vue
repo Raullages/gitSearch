@@ -156,8 +156,8 @@ export default {
   async mounted() {
     if (this.user && this.user.login) {
       await this.fetchRepos()
-      await this.fetchReposStarred()
       this.showRepos = true;
+      await this.fetchReposStarred()
       this.showReposStarred = false;
     }
   },
