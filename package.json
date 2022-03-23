@@ -1,5 +1,5 @@
 {
-  "name": "Buscar repo Seu buscador de repositórios do GitHub",
+  "name": "BuscarRepo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
