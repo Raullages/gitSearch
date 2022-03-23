@@ -28,10 +28,6 @@
             v-if="user && !loading"
             :user="user"
           />
-          <h4 v-if="infoLabel" class="text-center">
-            <strong>GitHub</strong> é uma plataforma de hospedagem de código-fonte e arquivos com controle de versão usando o Git. 
-            Ele permite que programadores, utilitários ou qualquer usuário cadastrado na plataforma contribuam em projetos privados e/ou Open Source de qualquer lugar do mundo.
-          </h4>
         </div>
         <div
           v-if="userError"
@@ -48,6 +44,12 @@
             role="status"
           >
           </span>
+        </div>
+        <div v-if="infoLabel">
+          <h4 class="text-center">
+            <strong>GitHub</strong> é uma plataforma de hospedagem de código-fonte e arquivos com controle de versão usando o Git. 
+            Ele permite que programadores, utilitários ou qualquer usuário cadastrado na plataforma contribuam em projetos privados e/ou Open Source de qualquer lugar do mundo.
+          </h4>
         </div>
       </div>
     </div>
@@ -87,7 +89,7 @@ export default {
         this.$router.push({
           name: 'Home',
           params: {
-            user: user
+            user,
           }
         })
       }
