@@ -1,80 +1,62 @@
 <template>
-  <div>
-    <div class="bg-github"></div>
-    <div class="container-fluid layout">
-      <div class="row">
-        <div class="col-12 text-center p-3">
-          <div class="col-12">
-            <img
-              src="../assets/github.png"
-              width="250"
-              alt="github"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-12">
-          <ul class="nav nav-tabs ">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Buscar repositórios</a>
-            </li>
-            <li class="nav-item">
-              <a 
-                class="nav-link disabled"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Tooltip on bottom"
-                aria-current="page"
-                href="#"
-              >
-                Comandos básicos do git
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row py-4" style="background-color: #FFF">
-        <div class="col-12">
-          <h5>{{ projectName }}</h5>
-        </div>
-        <div class="col-12 mt-3">
-          <dg-search  
-            placeholder="Pesquise pelo usuário"
-            @fetch="fetch"
+  <a-row>
+    <a-col :span="24" class="bg-github"></a-col>
+    <a-col
+      :xs="{ span: 24, offset: 0 }"
+      :md="{ span: 12, offset: 6 }"
+      style="padding: 10px"
+    >
+      <a-row>
+        <a-col :span="24" style="margin-bottom: 20px">
+          <img
+            src="../assets/github.png"
+            width="250"
+            alt="github"
           />
-        </div>
-        <div class="col-12 mt-4">
-          <dg-user
-            v-if="user && !loading"
-            :user="user"
-          />
-        </div>
-        <div
-          v-if="userError"
-          class="d-flex justify-content-center"
-        >
-          <h4>{{ userError }}</h4>
-        </div>
-        <div
-          v-if="loading"
-          class="d-flex justify-content-center"
-        >
-          <span
-            class="spinner-border text-primary"
-            role="status"
-          >
-          </span>
-        </div>
-        <div v-if="infoLabel">
-          <h4 class="text-center">
-            <strong>GitHub</strong> é uma plataforma de hospedagem de código-fonte e arquivos com controle de versão usando o Git. 
-            Ele permite que programadores, utilitários ou qualquer usuário cadastrado na plataforma contribuam em projetos privados e/ou Open Source de qualquer lugar do mundo.
-          </h4>
-        </div>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col :span="24">
+          <a-tabs  type="card">
+            <a-tab-pane key="1" tab="Buscar Repo">
+              <h3>{{ projectName }}</h3>
+              <dg-search  
+                placeholder="Pesquise pelo usuário"
+                @fetch="fetch"
+              />
+              <dg-user
+                v-if="user && !loading"
+                :user="user"
+              />
+            </a-tab-pane>
+            <a-tab-pane key="2" disabled tab="Comandos do Git" />
+          </a-tabs>
+        </a-col>
+      </a-row>
+      <div
+        v-if="userError"
+        class="d-flex justify-content-center"
+      >
+        <h4>{{ userError }}</h4>
       </div>
-    </div>
-  </div>
+      <div
+        v-if="loading"
+        class="d-flex justify-content-center"
+      >
+        <span
+          class="spinner-border text-primary"
+          role="status"
+        >
+        </span>
+      </div>
+      <div v-if="infoLabel">
+        <h4 class="text-center">
+          <strong>GitHub</strong> é uma plataforma de hospedagem de código-fonte e arquivos com controle de versão usando o Git. 
+          Ele permite que programadores, utilitários ou qualquer usuário cadastrado na plataforma contribuam em projetos privados e/ou Open Source de qualquer lugar do mundo.
+        </h4>
+      </div>
+    </a-col>
+  </a-row>
 </template>
 <script>
 import axios from 'axios'
@@ -106,6 +88,7 @@ export default {
   },
   methods: {
     async fetch(user, hasParams = false) {
+      console.log(user)
       if (!hasParams) {
         this.$router.push({
           name: 'Home',

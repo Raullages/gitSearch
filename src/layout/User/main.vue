@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 card">
+  <a-col :span="24">
     <div class="card__user">
       <img
         :src="user.avatar_url"
@@ -8,7 +8,7 @@
       />
       <div class="card__infos">
         <div>
-          <div class="d-flex align-items-center">
+          <a-row type="flex" align="top">
             <h4 class="p-0 m-0">{{ user.login }}</h4>
             <a
               :href="user.html_url"
@@ -18,41 +18,44 @@
             >
               <uil-external-link-alt size="16px" />
             </a>
-          </div>
-          <div class="d-flex flex-column">
+          </a-row>
+          <a-row>
             <small class="text-info">{{ user.type }}</small>
             <small class="text-info">{{ user.email }}</small>
-          </div>
+          </a-row>
         </div>
-        <div class="d-flex">
-          <dg-buttons
-            text="Repos"
-            :typeButton="!showRepos ? 'btn-outline-success' : 'btn-success'"
-            @click-button="() => {
-              showRepos = true;
-              showReposStarred = false;
-              fetchRepos();
-            }"
-            :disabled="loadingRepos"
-            :loading="loadingRepos"
-            :length="repos.length"
-            icon="uil-folder-open"
-            style="margin-right: 5px"
-          />
-          <dg-buttons
-            text="Starred"
-            :typeButton="!showReposStarred ? 'btn-outline-primary' : 'btn-primary'"
-            @click-button="() => {
-              showRepos = false;
-              showReposStarred = true;
-              fetchReposStarred();
-            }"
-            :disabled="loadingStarred"
-            :loading="loadingStarred"
-            :length="reposStarred.length"
-            icon="uil-star"
-          />
-        </div>
+        <a-row type="flex" :gutter="5">
+          <a-col>
+            <dg-buttons
+              text="Repos"
+              :typeButton="!showRepos ? '' : 'primary'"
+              @click-button="() => {
+                showRepos = true;
+                showReposStarred = false;
+                fetchRepos();
+              }"
+              :disabled="loadingRepos"
+              :loading="loadingRepos"
+              :length="repos.length"
+              icon="folder-open"
+            />
+          </a-col>
+          <a-col>
+            <dg-buttons
+              text="Starred"
+              :typeButton="!showReposStarred ? '' : 'primary'"
+              @click-button="() => {
+                showRepos = false;
+                showReposStarred = true;
+                fetchReposStarred();
+              }"
+              :disabled="loadingStarred"
+              :loading="loadingStarred"
+              :length="reposStarred.length"
+              icon="star"
+            />
+          </a-col>
+        </a-row>
       </div>
     </div>
     <div class="card__bio">
@@ -76,13 +79,12 @@
         <small v-if="showReposStarred">
           {{ listFilterReposStarred.length + ' Repositório(s) encontrado(s).' }}
         </small>
-        <button
-          class="btn btn-sm btn-link"
-          type="button"
+        <a-button
+          type="link"
           @click="dadoInput = null"
         >
           Limpar
-        </button>
+        </a-button>
       </div>
     </div>
     <div v-if="showRepos">
@@ -97,7 +99,7 @@
         :repos="listFilterReposStarred"
       />
     </div>
-  </div>
+  </a-col>
 </template>
 <script>
 import axios from 'axios'

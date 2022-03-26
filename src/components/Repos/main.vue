@@ -5,7 +5,7 @@
           class="cards__norespository"
           v-if="repos.length === 0"
         >
-          <h4>Nenhum repositório encontrado.</h4>
+          <h2>Nenhum repositório encontrado.</h2>
         </li>
         <li
           class="cards__item animate__animated animate__fadeInUp animate__fast"
@@ -14,7 +14,7 @@
         >
           <div>
             <div class="cards__clone">
-              <h4>{{ item.name }}</h4>
+              <h2>{{ item.name }}</h2>
               <a
                 :href="item.html_url"
                 target="_blank"
@@ -24,7 +24,7 @@
               </a>
             </div>
             <div class="cards__description">
-              <h6>{{ item.description ? item.description : 'Sem descrição' }}</h6>
+              <h4>{{ item.description ? item.description : 'Sem descrição' }}</h4>
             </div>
           </div>
           <div class="cards__actions">
@@ -100,7 +100,7 @@ export default {
   &__clone {
     display: flex;
     justify-content: space-between;
-    h4{
+    h2{
       max-width: 250px;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -116,7 +116,7 @@ export default {
     overflow-y: auto;
     height: 80px;
     min-height: 50px;
-    h6{
+    h4{
       color: #646464;
       font-weight: 300;
     }
@@ -130,6 +130,7 @@ export default {
     border-radius: 5px;
     padding: 3px 10px;
     span {
+      font-size: 16px;
       &:hover{
         cursor: default
       }

@@ -1,38 +1,28 @@
 <template>
-  <div class="row mb-1">
-    <div
-      class="col-12 input-group"
-      :class="{'was-validated': erroSearch !== null}"
-    >
-      <input
-        type="text"
-        class="form-control"
-        v-model="search"
-        :placeholder="placeholder"
-        @keypress.enter="clickSearch"
-        required
-      />
-      <button
-        class="btn btn-outline-secondary"
-        type="button"
-        @click.prevent="clickSearch"
-      >
-        <uil-search />
-      </button>
-      <div
-        class="invalid-feedback"
-        v-if="erroSearch !== ''"
-      >
-        {{ erroSearch }}
-      </div>
-    </div>
-  </div>
+  <a-row>
+    <a-col :span="24">
+      <a-form :form="form">
+        <a-form-item>
+          <a-input-search
+            placeholder="Pesquise pelo usuário"
+            @pressEnter="clickSearch"
+            allowClear
+            size="large"
+            v-decorator="[
+              'search',
+              { rules: [{ required: true, message: 'Campo obrigatório' }] },
+            ]"
+          >
+            <a-icon slot="prefix" type="user" />
+          </a-input-search>
+        </a-form-item>
+      </a-form>
+    </a-col>
+  </a-row>
 </template>
 <script>
-import { UilSearch } from '@iconscout/vue-unicons'
 export default {
   name: 'dgSearch',
-  components: { UilSearch },
   props: {
     placeholder: String,
   },
@@ -40,6 +30,7 @@ export default {
     return {
       search: null,
       erroSearch: null,
+      form: this.$form.createForm(this, { search: 'dynamic_rule'})
     }
   },
   methods: {
@@ -56,10 +47,12 @@ export default {
       
       return passou
     },
-    clickSearch() {
-      if (this.validField()) {
-        this.$emit('fetch', this.search)
-      }
+    clickSearch(e) {
+      this.form.validateFields(err => {
+        if (!err) {
+         this.$emit('fetch', e.target.value)
+        }
+      });
     }
   }
 }

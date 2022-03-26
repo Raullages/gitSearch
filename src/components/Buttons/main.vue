@@ -1,33 +1,20 @@
 <template>
   <div>
-    <button
-      :class="`btn btn-sm ${typeButton}`"
+    <a-button
+      size="small"
+      :type="`${typeButton}`"
       :disabled="disabled"
-      title="Repos"
       @click="$emit('click-button')"
+      :loading="loading"
+      :icon="icon"
     >
-      <components :is="icon" />
-      <span class="display-none">{{ text }}</span>
-      <span
-        class="spinner-border spinner-border-sm"
-        role="status"
-        v-if="loading"
-      >
-      </span> 
-      <small v-else>({{ length }})</small>
-    </button>
+      <span class="display-none">{{ text }}</span> 
+      <small>({{ length }})</small>
+    </a-button>
   </div>
 </template>
 <script>
-import {
-  UilStar,
-  UilFolderOpen
-} from '@iconscout/vue-unicons' 
 export default {
-  components: {
-    UilStar,
-    UilFolderOpen 
-  },
   props: {
     icon: String,
     text: String,
