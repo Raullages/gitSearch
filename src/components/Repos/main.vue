@@ -93,7 +93,6 @@ export default {
     margin: 3px;
     padding: 10px;
     height: 170px;
-    border: 1px solid #CECECE;
     border-radius: 5px;
     background-color: #FFF;
   }
