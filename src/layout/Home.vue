@@ -1,6 +1,5 @@
 <template>
   <a-row>
-    <a-col :span="24" class="bg-github"></a-col>
     <a-col
       :xs="{ span: 24, offset: 0 }"
       :md="{ span: 12, offset: 6 }"
